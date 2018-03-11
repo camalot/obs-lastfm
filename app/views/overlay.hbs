@@ -1,0 +1,16 @@
+{{#section 'head'}}
+<link rel="stylesheet" href="/assets/css/overlay.css" />
+{{/section}}
+
+
+<div id="scobble" data-user="{{user}}" data-poll="{{poll}}" {{#if track}}{{else}}class="hidden"{{/if}}>
+	<div class="lastfm-art"><img src="{{track.image}}" /></div>
+	<div class="lastfm-title">{{track.title}}</div>
+	<div class="lastfm-artist">{{track.artist}}</div>
+	<div class="lastfm-album">{{track.album}}</div>
+</div>
+
+
+{{#section 'head'}}
+<script src="/assets/scripts/overlay.js"></script>
+{{/section}}

@@ -1,0 +1,63 @@
+html,
+body {
+	width:100vw;
+	height:100vh;
+	margin:0;
+	padding:0;
+
+	font-family: "Roboto", "Helvetica", sans-serif;
+	overflow: hidden;
+}
+
+
+body {
+	color: #FFF;
+	font-size: 3vh;
+	background-color: #000;
+}
+
+* {
+	vertical-align: middle;
+}
+
+.hidden {
+	display: none;
+}
+#scobble {
+	padding: 2px;
+	max-width: 450px;
+	max-height: 76px;
+	min-height: 76px;
+
+	background-color: rgba(0, 0, 0, .5);
+	white-space: nowrap;
+}
+
+#scobble .lastfm-art {
+	float: left;
+	margin-right: 10px;
+}
+
+#scobble .lastfm-art img {
+	width: 72px;
+	height: 72px;
+}
+
+#scobble .lastfm-title {
+	font-weight: bold;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+#scobble .lastfm-artist {
+	font-size: .9em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+#scobble .lastfm-album {
+	font-size: .9em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
