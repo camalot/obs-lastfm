@@ -1,0 +1,5 @@
+Jenkinsfile
+Jenkinsfile.deploy
+.deploy/
+test/
+app.json
