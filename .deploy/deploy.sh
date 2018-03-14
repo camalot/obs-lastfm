@@ -55,7 +55,7 @@ docker push "${BUILD_PUSH_REGISTRY}/${tag_name_ver}";
 # Docker Push
 docker login --username "${DOCKER_HUB_USERNAME}" --password-stdin <<< "${DOCKER_HUB_PASSWORD}";
 
-# This will NOT push if the build version is `1.0.0-snapshot`. It will still push the `1.0.0-snapshot` build.
+# Only push "non-snapshots" to docker hub
 [[ ! $BUILD_VERSION =~ -snapshot$ ]] && \
 	docker push "${tag_name_latest}" && \
 	docker push "${tag_name_ver}";

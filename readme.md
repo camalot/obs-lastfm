@@ -6,6 +6,16 @@ Display `now playing` track information as an OBS Overlay
 
 `/overlay/:user` : Where `:user` is your lastfm username.
 
+### CUSTOMIZATION
+
+#### CSS CLASSES
+
+- `#scobble` : Container of the scobble info
+- `.lastfm-art` : Container for the `img` for the album art
+- `.lastfm-title` : Container for the song title
+- `.lastfm-artist` : Container for the artist
+- `.lastfm-album` : Container for the name of the album
+
 ## DEPLOY
 
 There are multiple ways that you can run this yourself. Here are a couple.
