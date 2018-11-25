@@ -44,7 +44,7 @@ $(function () {
 
 		container.animate({ "left": '-=500' }, () => {
 			$image.attr("src", getImageUrl(data.image));
-			if( !data.image ) {
+			if( !data.image || data.image.startsWith("data:image/png;base64,") ) {
 				$image.addClass("default-image");
 			} else {
 				$image.removeClass("default-image");
