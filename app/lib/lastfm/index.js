@@ -2,7 +2,7 @@
 
 const LastFM = require('lastfmapi');
 const config = require('../../config');
-
+const transparentUrl = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=";
 let _getTracksRaw = (user) => {
 	return new Promise((resolve, reject) => {
 		let lfm = new LastFM({
@@ -41,7 +41,7 @@ let _getTracks = (user) => {
 						title: nowplaying.name,
 						artist: nowplaying.artist['#text'],
 						album: nowplaying.album['#text'],
-						image: image
+						image: !image || image === "" ? transparentUrl : image
 					});
 
 				} else {

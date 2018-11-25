@@ -3,7 +3,6 @@ $(function () {
 	let scobble = $("#scobble");
 	let user = scobble.data("user");
 	let pollInterval = parseInt(scobble.data("poll") || "5000", 0);
-	let transparent = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=";
 
 	setInterval(function () {
 		$.ajax(`/api/user/tracks/${user}`, {
@@ -13,7 +12,6 @@ $(function () {
 						.fadeOut("fast");
 					return;
 				} else {
-					console.log("show track available");
 					scobble
 						.fadeIn("fast", () => {
 							if (scobble.data("id") !== data.id) {
@@ -26,10 +24,18 @@ $(function () {
 		});
 	}, pollInterval);
 
+	function getImageUrl(url) {
+		if(url) {
+			return url;
+		} else {
+			return "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=";
+		}
+	}
+
 	function updateSong(scobble, data, callback) {
 		let container = $(".scobble-container", scobble);
-		console.log(container);
 		scobble.data("id", data.id || data.title.toLowerCase().replace(/\s/gi, ""));
+		data.image = data.image == "" || data.image === undefined ? null : data.image;
 
 		let $image = $(".lastfm-art img", scobble);
 		let $title = $(".lastfm-title", scobble);
@@ -37,8 +43,8 @@ $(function () {
 		let $album = $(".lastfm-album", scobble);
 
 		container.animate({ "left": '-=500' }, () => {
-			$image.attr("src", data.image == null || data.image === "" ? transparent : data.image);
-			if(!data.image) {
+			$image.attr("src", getImageUrl(data.image));
+			if( !data.image ) {
 				$image.addClass("default-image");
 			} else {
 				$image.removeClass("default-image");
