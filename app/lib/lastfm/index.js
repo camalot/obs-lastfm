@@ -37,6 +37,7 @@ let _getTracks = (user) => {
 					}
 
 					return resolve({
+						id: nowplaying.mbid || nowplaying.name.toLowerCase().replace(/\s/gi,"-"),
 						title: nowplaying.name,
 						artist: nowplaying.artist['#text'],
 						album: nowplaying.album['#text'],
