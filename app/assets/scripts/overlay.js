@@ -8,24 +8,16 @@ $(function () {
 	setInterval(function () {
 		$.ajax(`/api/user/tracks/${user}`, {
 			success: (data, text, xhr) => {
-
-				// if(data === null) {
-				// 	scobble.addClass("hidden");
-				// 	return;
-				// } else {
-				// 	scobble.removeClass("hidden");
-				// }
 				if (data === null) {
 					scobble
 						.fadeOut("fast");
 					return;
 				} else {
+					console.log("show track available");
 					scobble
 						.fadeIn("fast", () => {
 							if (scobble.data("id") !== data.id) {
-								console.log("animate new track");
 								updateSong(scobble, data, () => {
-									console.log("updated track");
 								});
 							}
 						});
@@ -45,7 +37,12 @@ $(function () {
 		let $album = $(".lastfm-album", scobble);
 
 		container.animate({ "left": '-=500' }, () => {
-			$image.attr("src", data.image || transparent);
+			$image.attr("src", data.image == null || data.image === "" ? transparent : data.image);
+			if(!data.image) {
+				$image.addClass("default-image");
+			} else {
+				$image.removeClass("default-image");
+			}
 			$title.text(data.title || "");
 			$artist.text(data.artist || "");
 			$album.text(data.album || "");
