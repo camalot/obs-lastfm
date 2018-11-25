@@ -39,7 +39,7 @@ body {
 .scobble-container {
 	position: absolute;
 	height: 74px;
-	width: 375;
+	width: 375px;
 	left: 75px;
 	z-index: 900;
 }
