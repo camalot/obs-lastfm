@@ -36,6 +36,13 @@ body {
 	white-space: nowrap;
 }
 
+#scobble video {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 72px;
+}
+
 .scobble-container {
 	position: absolute;
 	height: 74px;

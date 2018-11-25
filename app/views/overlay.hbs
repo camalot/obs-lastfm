@@ -4,6 +4,9 @@
 
 
 <div id="scobble" data-user="{{user}}" data-id={{track.id}} data-poll="{{poll}}" {{#if track}}{{else}}class="hidden"{{/if}}>
+	{{#if video.enabled}}
+	<video src="{{video.url}}" autoplay="1" loop="1"></video>
+	{{/if}}
 	<div class="lastfm-art"><img class="default-image" src="{{track.image}}" /></div>
 	<div class="scobble-container">
 		<div class="lastfm-title">{{track.title}}</div>
