@@ -55,7 +55,65 @@ let _getTracks = (user) => {
 		});
 	});
 };
+
+let _getTrackInfo = (data) => {
+	return new Promise((resolve, reject) => {
+	_getTrackInfoRaw(data)
+		.then( (result) => {
+
+			if (result) {
+				let album = result.album;
+				let image = album.image ? album.image[0]["#text"] : null;
+				let filtered = album.image.filter((v, i) => {
+					return v.size === 'large';
+				});
+
+				if (filtered.length > 0) {
+					image = filtered[0]["#text"];
+				}
+				return resolve({
+					id: result.mbid || result.name.toLowerCase().replace(/\s/gi, "-"),
+					title: result.name,
+					artist: result.artist.name,
+					album: album.title,
+					image: !image || image === "" ? transparentUrl : image
+				});
+			} else {
+				return resolve(null);
+			}
+
+		});
+	});
+};
+
+
+let _getTrackInfoRaw = (data) => {
+	const lfm = new LastFM({
+		api_key: config.lastfm.API_KEY,
+		secret: config.lastfm.API_SECRET
+	});
+	return new Promise((resolve, reject) => {
+		lfm.track.getInfo({
+			artist: data.artist || "",
+			track: data.track || data
+		}, (err, result) => {
+			if (err) {
+				return reject(err);
+			}
+
+			if (result) {
+				return resolve(result);
+			} else {
+				return resolve(null);
+			}
+
+		});
+	});
+};
+
 module.exports = {
 	getTracksRaw: _getTracksRaw,
-	getTracks: _getTracks
-}
+	getTracks: _getTracks,
+	getTrackInfo: _getTrackInfo,
+	getTrackInfoRaw: _getTrackInfoRaw
+};

@@ -5,6 +5,7 @@ Display `now playing` track information as an OBS Overlay
 ## ENDPOINTS
 
 `/overlay/:user` : Where `:user` is your lastfm username.
+`/overlay/:user/:video` : Where `:video` is a video id on [imgur](https://imgur.com). For example, if your video is `https://i.imgur.com/Gbdpl6H.gifv`, your video id is `Gbdpl6H`
 
 ### CUSTOMIZATION
 
