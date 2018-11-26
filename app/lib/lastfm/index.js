@@ -60,13 +60,12 @@ let _getTrackInfo = (data) => {
 	return new Promise((resolve, reject) => {
 	_getTrackInfoRaw(data)
 		.then( (result) => {
-
 			if (result) {
-				let album = result.album;
+				let album = result.album || { };
 				let image = album.image ? album.image[0]["#text"] : null;
-				let filtered = album.image.filter((v, i) => {
+				let filtered = album.image ? album.image.filter((v, i) => {
 					return v.size === 'large';
-				});
+				}) : [];
 
 				if (filtered.length > 0) {
 					image = filtered[0]["#text"];
@@ -75,7 +74,7 @@ let _getTrackInfo = (data) => {
 					id: result.mbid || result.name.toLowerCase().replace(/\s/gi, "-"),
 					title: result.name,
 					artist: result.artist.name,
-					album: album.title,
+					album: album.title || "UNKNOWN",
 					image: !image || image === "" ? transparentUrl : image
 				});
 			} else {
@@ -98,7 +97,7 @@ let _getTrackInfoRaw = (data) => {
 			track: data.track || data
 		}, (err, result) => {
 			if (err) {
-				return reject(err);
+				return resolve(null);
 			}
 
 			if (result) {
