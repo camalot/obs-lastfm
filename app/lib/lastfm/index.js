@@ -25,7 +25,7 @@ let _getTracks = (user) => {
 		_getTracksRaw(user).then( (recentTracks) => {
 			if (recentTracks && recentTracks.track && recentTracks.track.length >= 1) {
 				let nowplaying = recentTracks.track[0];
-				if (nowplaying && nowplaying['@attr'] && nowplaying['@attr'].nowplaying === 'true') {
+				if (nowplaying && nowplaying['@attr'] && (nowplaying['@attr'].nowplaying === 'true' || nowplaying['@attr'].nowplaying === true)) {
 
 					let image = nowplaying.image ? nowplaying.image[0]["#text"] : null;
 					let filtered = nowplaying.image.filter((v, i) => {
