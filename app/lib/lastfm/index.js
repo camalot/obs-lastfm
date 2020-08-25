@@ -9,7 +9,7 @@ let _getTracksRaw = (user) => {
 			api_key: config.lastfm.API_KEY,
 			secret: config.lastfm.API_SECRET
 		});
-		lfm.user.getRecentTracks({ 'limit': 1, 'user': user }, (err, recentTracks) => {
+		lfm.user.getRecentTracks({ 'limit': 1, 'user': user, 'nowplaying': true }, (err, recentTracks) => {
 			if (err) {
 				console.error(err);
 				return reject(err);

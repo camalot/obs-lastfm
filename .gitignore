@@ -2,6 +2,7 @@ node_modules/
 *.iml
 .idea/
 .npmrc
+.npmrc-ignore
 coverage/
 dist/
 .env

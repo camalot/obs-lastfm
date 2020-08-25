@@ -2,19 +2,28 @@
 <link rel="stylesheet" href="/assets/css/overlay.css" />
 {{/section}}
 
-
-<div id="scobble" data-user="{{user}}" data-id={{track.id}} data-poll="{{poll}}" {{#if track}}{{else}}class="hidden"{{/if}}>
-	{{#if video.enabled}}
-	<video src="{{video.url}}" autoplay="1" loop="1"></video>
-	{{/if}}
-	<div class="lastfm-art"><img class="default-image" src="{{track.image}}" /></div>
-	<div class="scobble-container">
-		<div class="lastfm-title">{{track.title}}</div>
-		<div class="lastfm-artist">{{track.artist}}</div>
-		<div class="lastfm-album">{{track.album}}</div>
+{{#if error}}
+	<div id="scobble-error">
+		<div class="lastfm-art"><img class="default-image" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" /></div>
+		<div class="scobble-container">
+			<div class="lastfm-title">&nbsp;</div>
+			<div class="lastfm-artist">{{error.message}}</div>
+			<div class="lastfm-album"></div>
+		</div>
 	</div>
-</div>
-
+{{else}}
+	<div id="scobble" data-user="{{user}}" data-id={{track.id}} data-poll="{{poll}}" {{#if track}}{{else}}class="hidden"{{/if}}>
+		{{#if video.enabled}}
+		<video src="{{video.url}}" autoplay="1" loop="1"></video>
+		{{/if}}
+		<div class="lastfm-art"><img class="default-image" src="{{track.image}}" /></div>
+		<div class="scobble-container">
+			<div class="lastfm-title">{{track.title}}</div>
+			<div class="lastfm-artist">{{track.artist}}</div>
+			<div class="lastfm-album">{{track.album}}</div>
+		</div>
+	</div>
+{{/if}}
 
 {{#section 'head'}}
 <script src="/assets/scripts/overlay.js"></script>
