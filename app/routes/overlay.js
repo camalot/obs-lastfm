@@ -4,57 +4,55 @@ const router = express.Router();
 const lastfm = require('../lib/lastfm');
 const TwitchApi = require("../lib/utils").twitch;
 
-router.get('/:twitchId/:user/:video?', (req, res, next) => {
-	let user = req.params.user;
-	let pvideo = req.params.video;
-	let twitchId = req.params.twitchId;
+function requestOverlay(twitchId, userId, videoId) {
+	return new Promise((resolve, reject) => {
+		const api = new TwitchApi();
 
-	const api = new TwitchApi();
+		let videoObject = {
+			url: videoId ? `https://i.imgur.com/${videoId}.mp4` : null,
+			enabled: videoId ? true : false
+		};
 
-	let video = {
-		url: pvideo ? `https://i.imgur.com/${pvideo}.mp4` : null,
-		enabled: pvideo ? true : false
-	};
-
-	api.getSubscription(twitchId)
-	.then((sub) => {
-		if(sub) {
-			return lastfm.getTracks(req.params.user);
-		} else {
-			return new Promise((resolve, reject) => {
-				res.render("overlay", { user: user, error: { message: "Not Subscribed." } });
+		return api.getSubscription(twitchId)
+			.then((sub) => {
+				if (sub) {
+					return lastfm.getTracks(userId);
+				} else {
+					return resolve({ user: userId, error: { message: "Not Subscribed." } });
+				}
+			})
+			.then((track) => {
+				console.log(track);
+				return resolve({ user: userId, track: track, video: videoObject });
+			})
+			.catch((err) => {
+				return reject(err);
 			});
-		}
-	})
-	.then((track) => {
-		console.log(track);
-		res.render("overlay", { user: user, track: track, video: video });
-	})
-	.catch((err) => {
-		console.error(err);
-		return next(err);
 	});
+}
+
+router.get('/v2/:twitchId/:user/:video?', (req, res, next) => {
+	return requestOverlay(req.params.twitchId, req.params.user, req.params.video)
+		.then((result) => {
+			return res.render("overlay", result);
+		})
+		.catch((err) => {
+			console.error(err);
+			return next(err);
+		});
 });
 
 
 router.get('/:user/:video?', (req, res, next) => {
-	let user = req.params.user;
-	let pvideo = req.params.video;
-
-	let video = {
-		url: pvideo ? `https://i.imgur.com/${pvideo}.mp4` : null,
-		enabled: pvideo ? true : false
-	};
-
-	return lastfm.getTracks(req.params.user)
-	.then((track) => {
-		console.log(track);
-		res.render("overlay", { user: user, track: track, video: video });
-	})
-	.catch((err) => {
-		console.error(err);
-		return next(err);
-	});
+	// this will go away!!
+	return requestOverlay('58491861', req.params.user, req.params.video)
+		.then((result) => {
+			return res.render("overlay", result);
+		})
+		.catch((err) => {
+			console.error(err);
+			return next(err);
+		});
 });
 
 
