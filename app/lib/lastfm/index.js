@@ -51,6 +51,7 @@ let _getTracks = (user) => {
 				return resolve(null);
 			}
 		}).catch( (err) => {
+			console.error(err);
 			return reject(err);
 		});
 	});
@@ -81,6 +82,10 @@ let _getTrackInfo = (data) => {
 				return resolve(null);
 			}
 
+		})
+		.catch((err) => {
+			console.error(err);
+			return reject(err);
 		});
 	});
 };
@@ -97,7 +102,8 @@ let _getTrackInfoRaw = (data) => {
 			track: data.track || data
 		}, (err, result) => {
 			if (err) {
-				return resolve(null);
+				console.error(err);
+				return resolve(err);
 			}
 
 			if (result) {
