@@ -45,9 +45,11 @@ let _getTracks = (user) => {
 					});
 
 				} else {
+					console.log("no 'now playing' info");
 					return resolve(null);
 				}
 			} else {
+				console.log("no recent track");
 				return resolve(null);
 			}
 		}).catch( (err) => {
