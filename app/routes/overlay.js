@@ -18,6 +18,7 @@ function requestOverlay(twitchId, userId, videoId) {
 				if (sub) {
 					return lastfm.getTracks(userId);
 				} else {
+					console.log("not subscribed");
 					return resolve({ user: userId, error: { message: "Not Subscribed." } });
 				}
 			})
@@ -43,17 +44,17 @@ router.get('/v2/:twitchId/:user/:video?', (req, res, next) => {
 });
 
 
-router.get('/:user/:video?', (req, res, next) => {
-	// this will go away!!
-	return requestOverlay('58491861', req.params.user, req.params.video)
-		.then((result) => {
-			return res.render("overlay", result);
-		})
-		.catch((err) => {
-			console.error(err);
-			return next(err);
-		});
-});
+// router.get('/:user/:video?', (req, res, next) => {
+// 	// this will go away!!
+// 	return requestOverlay('58491861', req.params.user, req.params.video)
+// 		.then((result) => {
+// 			return res.render("overlay", result);
+// 		})
+// 		.catch((err) => {
+// 			console.error(err);
+// 			return next(err);
+// 		});
+// });
 
 
 module.exports = router;
