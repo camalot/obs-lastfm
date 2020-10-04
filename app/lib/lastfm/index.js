@@ -79,6 +79,7 @@ let _getTrackInfo = (data) => {
 					image: !image || image === "" ? transparentUrl : image
 				});
 			} else {
+				console.log("No result info");
 				return resolve(null);
 			}
 
