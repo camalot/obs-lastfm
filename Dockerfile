@@ -1,4 +1,4 @@
-FROM node:9-alpine
+FROM node:alpine
 
 # set version label
 ARG PROJECT_NAME="obs-lastfm"
@@ -38,8 +38,6 @@ RUN \
 USER ${VUSER}
 
 RUN \
-	npm config set registry https://artifactory.bit13.local/artifactory/api/npm/npm/ && \
-	npm config set strict-ssl false && \
 	npm version "${BUILD_VERSION}" --git-tag-version && \
 	npm install --production;
 
