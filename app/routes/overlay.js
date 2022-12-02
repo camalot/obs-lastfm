@@ -12,23 +12,33 @@ function requestOverlay(twitchId, userId, videoId) {
 			url: videoId ? `https://i.imgur.com/${videoId}.mp4` : null,
 			enabled: videoId ? true : false
 		};
+    return lastfm.getTracks(userId)
+      .then((track) => {
+        return resolve({
+          user: userId,
+          track: track,
+          video: videoObject
+        });
+      }).catch((err) => {
+        return reject(err);
+      });
 
-		return api.getSubscription(twitchId)
-			.then((sub) => {
-				if (sub) {
-					return lastfm.getTracks(userId);
-				} else {
-					console.log("not subscribed");
-					return resolve({ user: userId, error: { message: "Not Subscribed." } });
-				}
-			})
-			.then((track) => {
-				console.log(track);
-				return resolve({ user: userId, track: track, video: videoObject });
-			})
-			.catch((err) => {
-				return reject(err);
-			});
+		// return api.getSubscription(twitchId)
+		// 	.then((sub) => {
+		// 		if (sub) {
+		// 			return lastfm.getTracks(userId);
+		// 		} else {
+		// 			console.log("not subscribed");
+		// 			return resolve({ user: userId, error: { message: "Not Subscribed." } });
+		// 		}
+		// 	})
+		// 	.then((track) => {
+		// 		// console.log(track);
+		// 		return resolve({ user: userId, track: track, video: videoObject });
+		// 	})
+		// 	.catch((err) => {
+		// 		return reject(err);
+		// 	});
 	});
 }
 
