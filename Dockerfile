@@ -1,4 +1,4 @@
-FROM node:9-alpine
+FROM node:alpine
 
 # set version label
 ARG PROJECT_NAME="obs-lastfm"

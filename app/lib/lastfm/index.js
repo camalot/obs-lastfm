@@ -20,6 +20,31 @@ let _getTracksRaw = (user) => {
 	});
 };
 
+/*
+{
+  '@attr': {
+    page: '1',
+    total: '48307',
+    user: 'rconrad87',
+    perPage: '1',
+    totalPages: '48307'
+  },
+  track: [
+    {
+      artist: [Object],
+      album: [Object],
+      image: [Array],
+      streamable: '0',
+      date: [Object],
+      url: 'https://www.last.fm/music/Korn/_/Hater',
+      name: 'Hater',
+      mbid: '50f0173d-7d94-4c2b-8d19-c545d8a83103'
+    }
+  ]
+}
+*/
+
+
 let _getTracks = (user) => {
 	return new Promise((resolve, reject) => {
 		_getTracksRaw(user).then( (recentTracks) => {
