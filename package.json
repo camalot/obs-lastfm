@@ -27,7 +27,7 @@
     "promise": "^8.3.0",
     "redis": "^4.5.1",
     "serve-favicon": "^2.5.0",
-    "@twurple/auth": "^5.2.7",
+    "@twurple/auth": "^5.3.2",
     "@twurple/api": "^5.2.7"
 
   },
