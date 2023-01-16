@@ -28,7 +28,7 @@
     "redis": "^4.5.1",
     "serve-favicon": "^2.5.0",
     "@twurple/auth": "^5.2.7",
-    "@twurple/api": "^5.2.7"
+    "@twurple/api": "^5.3.3"
 
   },
   "devDependencies": {
